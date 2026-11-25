@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="OpenGeoWorld">
+  <defs>
+    <linearGradient id="ogw-g" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#5ad2ff"/>
+      <stop offset="1" stop-color="#3f8cff"/>
+    </linearGradient>
+    <clipPath id="ogw-c"><circle cx="32" cy="34" r="25"/></clipPath>
+  </defs>
+  <!-- the globe -->
+  <circle cx="32" cy="34" r="26.5" fill="#0b1630" stroke="url(#ogw-g)" stroke-width="3.5"/>
+  <g clip-path="url(#ogw-c)" fill="none" stroke="#5ad2ff" stroke-opacity=".38" stroke-width="1.8">
+    <ellipse cx="32" cy="34" rx="11.5" ry="25"/>
+    <path d="M6 25h52M6 43h52M32 9v50"/>
+  </g>
+  <!-- the place, built in 3D -->
+  <g clip-path="url(#ogw-c)">
+    <!-- house with a pitched roof -->
+    <path d="M12 45h12v19H12z" fill="#e8eef9"/>
+    <path d="M10.5 45.5L18 38l7.5 7.5z" fill="#f08a24"/>
+    <path d="M15 49h2.6v3H15zM19.4 49H22v3h-2.6z" fill="#0b1630" opacity=".55"/>
+    <!-- tower -->
+    <path d="M27 29h10v35H27z" fill="url(#ogw-g)"/>
+    <path d="M27 29h10l2.5-2.5h-10z" fill="#9fe6ff"/>
+    <path d="M37 29l2.5-2.5V64H37z" fill="#2a66d9"/>
+    <path d="M29.2 32h1.6v26h-1.6zM33.2 32h1.6v26h-1.6z" fill="#0b1630" opacity=".35"/>
+    <!-- block -->
+    <path d="M41 42h10v22H41z" fill="#c9d7f0"/>
+    <path d="M41 42h10l2.5-2.5h-10z" fill="#ffffff"/>
+    <path d="M51 42l2.5-2.5V64H51z" fill="#8296bb"/>
+    <path d="M43 45h6v1.6h-6zM43 49h6v1.6h-6zM43 53h6v1.6h-6z" fill="#0b1630" opacity=".35"/>
+  </g>
+  <!-- the picked point -->
+  <path d="M33.2 3C29 3 25.7 6.3 25.7 10.4c0 5.4 7.5 13.6 7.5 13.6s7.5-8.2 7.5-13.6C40.7 6.3 37.4 3 33.2 3z" fill="#f08a24" stroke="#0b1630" stroke-width="1.6"/>
+  <circle cx="33.2" cy="10.4" r="2.6" fill="#0b1630"/>
+</svg>

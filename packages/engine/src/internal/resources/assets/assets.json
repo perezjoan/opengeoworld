@@ -1,0 +1,121 @@
+{
+    "js": {
+        "basis": "/engine-assets/js/basis/",
+        "draco": "/engine-assets/js/draco/"
+    },
+    "jsons": {
+        "defaultAnims": "/engine-assets/jsons/defaultAnims.json"
+    },
+    "textures": {
+        "butterfly": "/engine-assets/textures/butterfly.png",
+        "cameraIcon": "/engine-assets/textures/cameraIcon.png",
+        "cloudsalt": "/engine-assets/textures/clouds.png",
+        "clouds2": "/engine-assets/textures/clouds2.png",
+        "dust3": "/engine-assets/textures/dust3v2.png",
+        "impact": "/engine-assets/textures/impact.png",
+        "oceanSuperHd": "/engine-assets/textures/oceanSuperHd.png",
+        "waterNormals": "/engine-assets/textures/waterNormals.jpg",
+        "art-placeholder": "/engine-assets/textures/art-placeholder.png",
+        "noiseDiffuse": "/engine-assets/textures/noise-diffuse.jpg",
+        "noiseLighting": "/engine-assets/textures/noise-lighting.jpg",
+        "tunnelNormal": "/engine-assets/textures/normal.jpg",
+        "tunnelStars": "/engine-assets/textures/stars.jpg",
+        "smaaSearch": "/engine-assets/textures/smaa-search.png",
+        "smaaArea": "/engine-assets/textures/smaa-area.png"
+    },
+    "sprites": {
+        "uikeys": "/engine-assets/sprites/uikeys.png",
+        "uikeysJSON": "/engine-assets/sprites/uikeysJSON.json",
+        "mobileuikeys": "/engine-assets/sprites/uimobilekeys.png",
+        "mobileuikeysJSON": "/engine-assets/sprites/uimobilekeys.json"
+    },
+    "models": {
+        "buttletV2": "/engine-assets/models/buttletV2.glb",
+        "speedPlatform3": "/engine-assets/models/speedPlatform3.glb",
+        "grassLODs": "/engine-assets/models/grassLODs.glb"
+    },
+    "images": {
+        "mferAvatarPic": "/engine-assets/images/avatar-pic.png"
+    },
+    "vrms": {
+        "lod": "/engine-assets/vrms/human-lod.vrm",
+        "sunshine": "/engine-assets/vrms/human.vrm"
+    },
+    "lutmaps": {
+        "hudson": "/engine-assets/lutmaps/hudson.png",
+        "hudsonImg": "/engine-assets/lutmaps/hudsonImg.png",
+        "kodak": "/engine-assets/lutmaps/kodak.png",
+        "kodakImg": "/engine-assets/lutmaps/kodakImg.png",
+        "sunset": "/engine-assets/lutmaps/sunset.png",
+        "sunsetImg": "/engine-assets/lutmaps/sunsetImg.png"
+    },
+    "terrain": {
+        "grid": "/engine-assets/terrain/grid-v2.png",
+        "gridImg": "/engine-assets/terrain/gridImg-v2.png",
+        "wooden": "/engine-assets/terrain/wooden.jpeg",
+        "woodenImg": "/engine-assets/terrain/woodenImg-v2.png",
+        "rock": "/engine-assets/terrain/rock.jpg",
+        "rockImg": "/engine-assets/terrain/rockImg-v2.png",
+        "grass": "/engine-assets/terrain/grass.jpg",
+        "grassImg": "/engine-assets/terrain/grassImg-v2.png",
+        "sand": "/engine-assets/terrain/sand.jpg",
+        "sandImg": "/engine-assets/terrain/sandImg-v2.png",
+        "snow": "/engine-assets/terrain/snow.jpg",
+        "snowImg": "/engine-assets/terrain/snowImg-v2.png",
+        "rust": "/engine-assets/terrain/rust.jpg",
+        "rustImg": "/engine-assets/terrain/rustImg-v2.png",
+        "marble": "/engine-assets/terrain/marble.jpg",
+        "marbleImg": "/engine-assets/terrain/marbleImg-v2.png",
+        "brick": "/engine-assets/terrain/brick.jpg",
+        "brickImg": "/engine-assets/terrain/brickImg-v2.png"
+    },
+    "normalMaps": {
+        "bump": "/engine-assets/normalMaps/bump.jpg",
+        "ice": "/engine-assets/normalMaps/ice.jpg",
+        "holes": "/engine-assets/normalMaps/holes.png",
+        "ancient": "/engine-assets/normalMaps/ancient.jpg",
+        "bricks": "/engine-assets/normalMaps/bricks.jpg",
+        "metalsheet": "/engine-assets/normalMaps/metalsheet.jpg"
+    },
+    "envmap": {
+        "studio": "/engine-assets/envmap/studio.hdr",
+        "studioImg": "/engine-assets/envmap/studioImg.png",
+        "vig": "/engine-assets/envmap/vig.hdr",
+        "vigImg": "/engine-assets/envmap/vigImg.png",
+        "fields": "/engine-assets/envmap/fields.hdr",
+        "fieldsImg": "/engine-assets/envmap/fieldsImg.png"
+    },
+    "background": {
+        "day": "/engine-assets/background/day.jpg",
+        "day2": "/engine-assets/background/day2.jpg",
+        "orbit": "/engine-assets/background/orbit.jpg",
+        "orbit2": "/engine-assets/background/orbit2.jpg",
+        "space": "/engine-assets/background/space.jpg",
+        "mountains": "/engine-assets/background/mountains.jpg",
+        "night": "/engine-assets/background/night.jpg",
+        "mud_road": "/engine-assets/background/mud_road.jpg"
+    },
+    "fonts": {
+        "aeonik-bold": {
+            "name": "aeonik-bold",
+            "json": "/engine-assets/fonts/droid-sans-bold/json.json",
+            "tex": "/engine-assets/fonts/droid-sans-bold/tex.png"
+        },
+        "aeonik-medium": {
+            "name": "aeonik-medium",
+            "json": "/engine-assets/fonts/droid-sans-bold/json.json",
+            "tex": "/engine-assets/fonts/droid-sans-bold/tex.png"
+        },
+        "playfair-regular": {
+            "name": "playfair-regular",
+            "tex": "/engine-assets/fonts/droid-sans-bold/tex.png",
+            "json": "/engine-assets/fonts/droid-sans-bold/json.json"
+        },
+
+        "playfair-italic": {
+            "name": "playfair-italic",
+            "tex": "/engine-assets/fonts/droid-sans-bold/tex.png",
+            "json": "/engine-assets/fonts/droid-sans-bold/json.json"
+        }
+    }
+}

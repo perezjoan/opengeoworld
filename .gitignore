@@ -1,0 +1,28 @@
+# dependencies
+node_modules
+**/node_modules
+
+# builds and caches
+.next
+.swc/
+dist/
+*.tsbuildinfo
+.turbo
+/coverage
+*/coverage
+
+# Next.js generates this one per app
+next-env.d.ts
+
+# env and editor
+.env
+.env.*
+!.env.example
+.vscode
+.DS_Store
+*.pem
+npm-debug.log*
+logs/
+
+# static export of the world app (assembled into dist/ by `pnpm build`)
+apps/world/out/

@@ -1,0 +1,42 @@
+{
+  "name": "opengeoworld",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Pick a place on a map, build it in 3D from open data (no API keys), walk and fly around it in the browser.",
+  "packageManager": "pnpm@10.10.0",
+  "engines": {
+    "node": ">=20.9.0"
+  },
+  "scripts": {
+    "dev": "node apps/web/serve.mjs",
+    "build": "node scripts/build.mjs",
+    "preview": "node scripts/preview.mjs",
+    "world": "pnpm --filter @opengeoworld/world dev",
+    "check": "pnpm --filter @opengeoworld/world check",
+    "engine:check": "pnpm --filter @opengeoworld/engine check",
+    "engine:test": "pnpm --filter @opengeoworld/engine test",
+    "tools:test": "pnpm --filter @opengeoworld/tools test",
+    "add-model": "tsx packages/tools/src/cli.ts add-model",
+    "optimize-model": "tsx packages/tools/src/cli.ts optimize-model",
+    "inspect-gltf": "tsx packages/tools/src/cli.ts inspect-gltf",
+    "validate-scene": "tsx packages/tools/src/cli.ts validate-scene",
+    "run-space": "tsx packages/tools/src/cli.ts run-space"
+  },
+  "devDependencies": {
+    "tsx": "^4.21.0"
+  },
+  "pnpm": {
+    "overrides": {
+      "sharp": "^0.33.0"
+    },
+    "ignoredBuiltDependencies": [
+      "@parcel/watcher",
+      "esbuild",
+      "unrs-resolver",
+      "cpu-features"
+    ],
+    "onlyBuiltDependencies": [
+      "sharp"
+    ]
+  }
+}

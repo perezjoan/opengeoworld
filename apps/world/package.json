@@ -1,0 +1,28 @@
+{
+  "name": "@opengeoworld/world",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev --turbopack",
+    "build": "next build --turbopack",
+    "check": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@dimforge/rapier3d": "0.11.2",
+    "@opengeoworld/engine": "workspace:*",
+    "next": "16.1.6",
+    "react": "19.2.4",
+    "react-dom": "19.2.4",
+    "three": "^0.170.0"
+  },
+  "devDependencies": {
+    "@tailwindcss/postcss": "^4",
+    "@types/node": "^20",
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
+    "@types/three": "^0.170.0",
+    "sass": "^1.69.5",
+    "tailwindcss": "^4",
+    "typescript": "^5"
+  }
+}

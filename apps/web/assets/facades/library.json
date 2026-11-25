@@ -1,0 +1,304 @@
+{
+ "storey_m": 3,
+ "walls": {
+  "stone": [
+   {
+    "file": "stone-1.jpg",
+    "aspect": 0.92,
+    "mean": "#cdc4b6"
+   },
+   {
+    "file": "stone-2.jpg",
+    "aspect": 0.944,
+    "mean": "#d4c8b2"
+   },
+   {
+    "file": "stone-3.jpg",
+    "aspect": 0.631,
+    "mean": "#c5c2bb"
+   },
+   {
+    "file": "stone-4.jpg",
+    "aspect": 0.842,
+    "mean": "#cac6c4"
+   },
+   {
+    "file": "stone-5.jpg",
+    "aspect": 0.776,
+    "mean": "#a79d62"
+   },
+   {
+    "file": "stone-6.jpg",
+    "aspect": 0.794,
+    "mean": "#a3a160"
+   }
+  ],
+  "render": [
+   {
+    "file": "render-1.jpg",
+    "aspect": 0.879,
+    "mean": "#a8a06d"
+   },
+   {
+    "file": "render-2.jpg",
+    "aspect": 0.882,
+    "mean": "#9d9f51"
+   },
+   {
+    "file": "render-3.jpg",
+    "aspect": 0.871,
+    "mean": "#dbbca2"
+   },
+   {
+    "file": "render-4.jpg",
+    "aspect": 0.886,
+    "mean": "#d6ad95"
+   },
+   {
+    "file": "render-5.jpg",
+    "aspect": 0.861,
+    "mean": "#eae9e4"
+   },
+   {
+    "file": "render-6.jpg",
+    "aspect": 0.96,
+    "mean": "#ece8df"
+   },
+   {
+    "file": "render-7.jpg",
+    "aspect": 0.925,
+    "mean": "#cd7051"
+   }
+  ],
+  "brick": [
+   {
+    "file": "brick-1.jpg",
+    "aspect": 0.9,
+    "mean": "#9c6e56"
+   },
+   {
+    "file": "brick-2.jpg",
+    "aspect": 0.865,
+    "mean": "#a35d40"
+   },
+   {
+    "file": "brick-3.jpg",
+    "aspect": 0.86,
+    "mean": "#9c7d55"
+   },
+   {
+    "file": "brick-4.jpg",
+    "aspect": 0.84,
+    "mean": "#9d8453"
+   },
+   {
+    "file": "brick-5.jpg",
+    "aspect": 0.884,
+    "mean": "#c29b9b"
+   },
+   {
+    "file": "brick-6.jpg",
+    "aspect": 0.875,
+    "mean": "#bca1a4"
+   }
+  ],
+  "modern": [
+   {
+    "file": "modern-1.jpg",
+    "aspect": 0.652,
+    "mean": "#6c89a6"
+   },
+   {
+    "file": "modern-2.jpg",
+    "aspect": 0.535,
+    "mean": "#5a82a1"
+   },
+   {
+    "file": "modern-3.jpg",
+    "aspect": 1.423,
+    "mean": "#eaedf2"
+   },
+   {
+    "file": "modern-4.jpg",
+    "aspect": 1.089,
+    "mean": "#ccd0d1"
+   },
+   {
+    "file": "modern-5.jpg",
+    "aspect": 0.762,
+    "mean": "#444b4d"
+   }
+  ],
+  "concrete": [
+   {
+    "file": "concrete-1.jpg",
+    "aspect": 0.849,
+    "mean": "#b3afa9"
+   },
+   {
+    "file": "concrete-2.jpg",
+    "aspect": 1.471,
+    "mean": "#8b9ca7"
+   }
+  ],
+  "industrial": [
+   {
+    "file": "industrial-1.jpg",
+    "aspect": 2.07,
+    "mean": "#aebac0"
+   },
+   {
+    "file": "industrial-2.jpg",
+    "aspect": 0.882,
+    "mean": "#9e6b52"
+   },
+   {
+    "file": "industrial-3.jpg",
+    "aspect": 0.922,
+    "mean": "#9b664b"
+   }
+  ],
+  "house": [
+   {
+    "file": "house-render-1.jpg",
+    "aspect": 1.173,
+    "mean": "#c5b49c",
+    "material": "render"
+   },
+   {
+    "file": "house-render-2.jpg",
+    "aspect": 1.209,
+    "mean": "#c4b092",
+    "material": "render"
+   },
+   {
+    "file": "house-render-3.jpg",
+    "aspect": 1.015,
+    "mean": "#eaeaea",
+    "material": "render"
+   },
+   {
+    "file": "house-render-4.jpg",
+    "aspect": 0.988,
+    "mean": "#eaeae6",
+    "material": "render"
+   },
+   {
+    "file": "house-render-5.jpg",
+    "aspect": 1.024,
+    "mean": "#f0dcc0",
+    "material": "render"
+   },
+   {
+    "file": "house-render-6.jpg",
+    "aspect": 1.079,
+    "mean": "#f1dab4",
+    "material": "render"
+   },
+   {
+    "file": "house-render-7.jpg",
+    "aspect": 1.013,
+    "mean": "#c9c9ca",
+    "material": "render"
+   },
+   {
+    "file": "house-brick-1.jpg",
+    "aspect": 1.244,
+    "mean": "#a96756",
+    "material": "brick"
+   },
+   {
+    "file": "house-brick-2.jpg",
+    "aspect": 1.179,
+    "mean": "#a95b46",
+    "material": "brick"
+   },
+   {
+    "file": "house-stone-1.jpg",
+    "aspect": 1.035,
+    "mean": "#b4995a",
+    "material": "stone"
+   },
+   {
+    "file": "house-wood-1.jpg",
+    "aspect": 0.963,
+    "mean": "#e6e8ec",
+    "material": "wood"
+   }
+  ]
+ },
+ "shops": [
+  {
+   "file": "shop-1.jpg",
+   "aspect": 1.601,
+   "mean": "#664d4f"
+  },
+  {
+   "file": "shop-2.jpg",
+   "aspect": 1.601,
+   "mean": "#9a7e4f"
+  },
+  {
+   "file": "shop-3.jpg",
+   "aspect": 1.601,
+   "mean": "#4a4634"
+  },
+  {
+   "file": "shop-4.jpg",
+   "aspect": 1.601,
+   "mean": "#655139"
+  },
+  {
+   "file": "shop-5.jpg",
+   "aspect": 1.601,
+   "mean": "#bcc0c9"
+  },
+  {
+   "file": "shop-6.jpg",
+   "aspect": 1.601,
+   "mean": "#c8c6c4"
+  },
+  {
+   "file": "shop-7.jpg",
+   "aspect": 1.601,
+   "mean": "#b7a591"
+  },
+  {
+   "file": "shop-8.jpg",
+   "aspect": 1.601,
+   "mean": "#c6b49d"
+  },
+  {
+   "file": "shop-9.jpg",
+   "aspect": 1.601,
+   "mean": "#858c91"
+  },
+  {
+   "file": "shop-10.jpg",
+   "aspect": 1.601,
+   "mean": "#868d8e"
+  }
+ ],
+ "roofs": {
+  "tiles": {
+   "file": "roof-tiles.jpg",
+   "metres": 2.5,
+   "mean": "#c66c42"
+  },
+  "slate": {
+   "file": "roof-slate.jpg",
+   "metres": 2.5,
+   "mean": "#36516a"
+  },
+  "zinc": {
+   "file": "roof-zinc.jpg",
+   "metres": 4.0,
+   "mean": "#b4bbbe"
+  },
+  "flat": {
+   "file": "roof-flat.jpg",
+   "metres": 6.0,
+   "mean": "#babab6"
+  }
+ }
+}

@@ -1,0 +1,244 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>OpenGeoWorld · any place on Earth in 3D, from open data</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="Pick a place, build a light 3D map of it from open data, then fly a drone over it or walk its streets. In your browser, no account, no API key. By Urban Geo Analytics." />
+  <link rel="icon" href="assets/brand/logo.svg" type="image/svg+xml" />
+  <!-- Libraries and fonts are served from the site (vendor/, assets/): no CDN. -->
+  <link rel="stylesheet" href="vendor/maplibre/maplibre-gl.css" />
+  <script src="vendor/maplibre/maplibre-gl.js"></script>
+  <script type="importmap">
+    {
+      "imports": {
+        "three": "./vendor/three/three.module.js",
+        "three/addons/": "./vendor/three/addons/"
+      }
+    }
+  </script>
+  <link rel="stylesheet" href="src/app.css" />
+</head>
+<body>
+  <header>
+    <a class="brand" href="./" title="OpenGeoWorld">
+      <img src="assets/brand/logo.svg" alt="" width="36" height="36" />
+      <span class="wordmark">Open<b>Geo</b>World</span>
+    </a>
+    <ol class="stepper">
+      <li data-step="1" class="active"><button type="button"><b>1</b><span>Pick a Location</span></button></li>
+      <li data-step="2"><button type="button"><b>2</b><span>Build the 3D Map</span></button></li>
+      <li data-step="3"><button type="button"><b>3</b><span>Fly / Walk</span></button></li>
+    </ol>
+    <div id="worldPill" class="pill" title="Local world app">World: checking…</div>
+    <nav class="links">
+      <button type="button" data-dialog="about">About</button>
+      <button type="button" data-dialog="license">License</button>
+      <button type="button" data-dialog="contact">Contact</button>
+    </nav>
+    <a class="by" href="https://urbangeoanalytics.com" target="_blank" rel="noopener" title="Urban Geo Analytics">
+      <img src="assets/brand/uga-logo-white.png" alt="Urban Geo Analytics" />
+    </a>
+  </header>
+
+  <div id="app">
+    <aside id="panel">
+      <!-- phones: the panel is a sheet under the map; this handle folds it to the step's title -->
+      <button id="sheetHandle" class="sheet-handle" type="button" aria-label="Show or hide the panel"><span></span></button>
+      <!-- 1. PICK A LOCATION -->
+      <section class="step" data-step="1">
+        <h2><b>1</b> Pick a Location <span class="summary" id="sum1"></span></h2>
+        <div class="step-body">
+          <form id="searchForm" class="row">
+            <input id="searchInput" type="search" placeholder="Search a place or address…" autocomplete="off" />
+            <button type="submit">Go</button>
+          </form>
+          <p class="hint">…or pick a point on the map.</p>
+          <label class="field">
+            <span>Radius <output id="radiusLabel">300 m</output></span>
+            <input id="radius" type="range" min="100" max="1000" step="50" value="300" />
+          </label>
+          <div id="pickedInfo" class="muted">No point yet.</div>
+          <button id="next1" class="primary" disabled>Build the 3D map ›</button>
+        </div>
+      </section>
+
+      <!-- 2. BUILD THE 3D MAP -->
+      <section class="step" data-step="2">
+        <h2><b>2</b> Build the 3D Map <span class="summary" id="sum2"></span></h2>
+        <div class="step-body">
+          <label class="field">
+            <span>Buildings</span>
+            <select id="buildingsSrc">
+              <option value="auto">Auto (IGN in France, OpenStreetMap elsewhere)</option>
+              <option value="ign">IGN BD TOPO (France, measured heights)</option>
+              <option value="tiles">OpenStreetMap, vector tiles (worldwide, fast)</option>
+              <option value="osm">OpenStreetMap, Overpass (worldwide, roof and material tags, slower)</option>
+            </select>
+          </label>
+          <label class="field">
+            <span>Aerial imagery (ground and roofs)</span>
+            <select id="imagery">
+              <option value="auto">Auto (best open aerial photo here)</option>
+              <option value="s2">Sentinel-2 satellite (worldwide, 10 m)</option>
+              <option value="none">No imagery</option>
+            </select>
+          </label>
+          <div class="field">
+            <span>Open data layers</span>
+            <div class="checks">
+              <label class="check"><input id="terrain" type="checkbox" checked /> Terrain</label>
+              <label class="check"><input id="nature" type="checkbox" checked /> Trees &amp; water</label>
+              <label class="check"><input id="roads" type="checkbox" checked /> Roads</label>
+              <label class="check"><input id="rails" type="checkbox" checked /> Railways</label>
+            </div>
+          </div>
+          <details class="gen" open>
+            <summary>Generated details <span class="badge generated">not in the data</span></summary>
+            <p class="hint">Added so the place looks complete, not measured or mapped. Untick to see only what the open data says.</p>
+            <div class="checks">
+              <label class="check" title="Generic photo tiles picked from the building's type and material, not the real facade"><input id="genFacades" type="checkbox" checked /> Facade photos</label>
+              <label class="check" title="Pitched roofs for houses whose data says nothing about the roof"><input id="genRoofs" type="checkbox" checked /> Guessed house roofs</label>
+              <label class="check" title="Trees planted at random in woods and parks (mapped street trees stay)"><input id="genTrees" type="checkbox" checked /> Trees in woods &amp; parks</label>
+              <label class="check" title="Sidewalks assumed from the street type, not mapped"><input id="genSidewalks" type="checkbox" checked /> Sidewalks</label>
+              <label class="check" title="Dashed centre lines drawn on wide roads"><input id="genMarkings" type="checkbox" checked /> Road markings</label>
+            </div>
+          </details>
+          <button id="build" class="primary" disabled>Build the 3D map</button>
+          <ol id="log" class="log"></ol>
+          <button id="next2" class="primary" hidden>Launch the drone ›</button>
+          <button id="back2" class="secondary">‹ Back to the map</button>
+          <details id="factsBox" class="facts-box">
+            <summary>Where the data comes from</summary>
+            <ul id="facts" class="facts"></ul>
+          </details>
+        </div>
+      </section>
+
+      <!-- 3. FLY / WALK -->
+      <section class="step" data-step="3">
+        <h2><b>3</b> Fly / Walk <span class="summary" id="sum3"></span></h2>
+        <div class="step-body">
+          <div class="field">
+            <span>Start as</span>
+            <div class="segmented" role="radiogroup">
+              <label><input type="radio" name="startMode" value="drone" checked /> ✈ Drone, above the place</label>
+              <label><input type="radio" name="startMode" value="walk" /> 🚶 On foot, in the street</label>
+            </div>
+          </div>
+          <button id="reload" class="secondary">Restart the world</button>
+          <a id="openTab" class="button secondary disabled" target="_blank" rel="noopener">Open in new tab</a>
+          <div class="field">
+            <span>Download</span>
+            <div class="row downloads">
+              <button id="download" class="secondary" disabled title="The textured 3D model (glTF binary), in metres around the picked point">GLB</button>
+              <button id="downloadGeojson" class="secondary" disabled title="Buildings with heights, roads, railways, trees and water in lon/lat, with their sources: QGIS, ArcGIS, kepler.gl…">GeoJSON</button>
+              <button id="download3dtiles" class="secondary" disabled title="The textured model placed on the globe (tileset.json + GLB, zipped): CesiumJS, Cesium ion, QGIS 3D, ArcGIS, Unreal/Unity">3D Tiles</button>
+            </div>
+          </div>
+          <p class="hint">Click inside the world to start. <kbd>F</kbd> drone ↔ on foot. Drone: <kbd>W</kbd><kbd>A</kbd><kbd>S</kbd><kbd>D</kbd> fly, <kbd>Space</kbd> up, <kbd>Shift</kbd> down. On foot: <kbd>W</kbd><kbd>A</kbd><kbd>S</kbd><kbd>D</kbd> walk, <kbd>Shift</kbd> sprint, <kbd>Space</kbd> jump. Mouse to look, <kbd>Esc</kbd> releases the mouse.</p>
+          <button id="back3" class="secondary">‹ Back to build</button>
+        </div>
+      </section>
+
+      <footer class="panel-foot">
+        <p>Open data only · runs in your browser · nothing is uploaded.</p>
+        <p>An open-source tool by <a href="https://urbangeoanalytics.com" target="_blank" rel="noopener">Urban Geo Analytics</a> · <a href="#" data-dialog="license">MIT License</a> · <span class="app-version"></span></p>
+      </footer>
+    </aside>
+
+    <main>
+      <nav class="tabs">
+        <button data-tab="map" class="on">Map</button>
+        <button data-tab="view" disabled>3D preview</button>
+        <button data-tab="walk" disabled>World</button>
+        <button id="fullscreen" class="right" hidden title="Fullscreen">⛶ Fullscreen</button>
+      </nav>
+      <div class="panes">
+        <div id="map" class="pane on"></div>
+        <div id="view" class="pane"></div>
+        <div id="walkPane" class="pane">
+          <iframe id="world" title="3D world" allow="fullscreen; autoplay; gamepad; xr-spatial-tracking"></iframe>
+          <div id="worldOverlay" class="overlay">Build a place and send it to the world to walk here.</div>
+          <div id="minimap" class="minimap" hidden>
+            <div class="minimap-head">
+              <span id="minimapInfo">Minimap</span>
+              <span class="minimap-actions">
+                <button id="flyToggle" title="Drone ↔ on foot (same as F)">✈ Drone</button>
+                <button id="minimapToggle" title="Hide / show the minimap">–</button>
+              </span>
+            </div>
+            <div id="minimapMap"></div>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <!-- ABOUT -->
+  <dialog id="dlg-about" class="dlg">
+    <button class="dlg-close" aria-label="Close">✕</button>
+    <div class="dlg-head">
+      <img src="assets/brand/logo.svg" alt="" width="56" height="56" />
+      <div><h2 class="wordmark">Open<b>Geo</b>World</h2><p class="tagline">Any place on Earth in 3D, from open data. <span class="app-version"></span></p></div>
+    </div>
+    <p class="lead">Pick a place, turn it into a light 3D map built only from open data, then fly a drone over it or walk its streets, all in your browser. No account, no API key, no install.</p>
+    <ol class="how">
+      <li><b>Pick a Location</b> anywhere on the map, with a radius from 100 m to 1 km.</li>
+      <li><b>Build the 3D Map</b>: buildings with their real heights and roofs, photo facades, terrain, aerial imagery, roads and sidewalks, trees and water. Download it as a 3D model (GLB), as GIS data with real coordinates (GeoJSON) or placed on the globe (3D Tiles, for Cesium or QGIS).</li>
+      <li><b>Fly / Walk</b>: start as a drone above the place, land, and walk around it on foot.</li>
+    </ol>
+    <p>In France it uses IGN's measured buildings, 1 m terrain and 20 cm aerial photos; elsewhere OpenStreetMap, the sharpest elevation model available (USGS lidar in the US, GSI 5 m in Japan, worldwide tiles elsewhere) and the sharpest aerial photos (national programmes in Switzerland, the Netherlands, Austria, Spain and Japan, Esri World Imagery everywhere else). The place you build stays in your browser: nothing is uploaded.</p>
+    <div class="by-block">
+      <img src="assets/brand/uga-logo-white.png" alt="Urban Geo Analytics" />
+      <p><b>Urban Geo Analytics</b> is an independent research and consulting practice focused on geospatial modelling, AI for cities and open-source urban analytics: Spatial Analysis, GeoAI &amp; Machine Learning. OpenGeoWorld sits next to its other open tools for urban research, such as SAGAI (streetscape analysis with generative AI), UVLM (a loader for vision-language models) and RUE (render urban edits).</p>
+      <p><a class="button primary" href="https://urbangeoanalytics.com" target="_blank" rel="noopener">urbangeoanalytics.com ↗</a></p>
+    </div>
+  </dialog>
+
+  <!-- LICENSE -->
+  <dialog id="dlg-license" class="dlg">
+    <button class="dlg-close" aria-label="Close">✕</button>
+    <h2>License &amp; credits</h2>
+    <h3>OpenGeoWorld</h3>
+    <p>The code is open source under the <b>MIT License</b>. The 3D engine and tools come from oncyber's <i>awe</i> engine (MIT). The photo facade library (walls, shopfronts, roofs) was generated for this project and is released with it, under MIT or CC0. The avatar, its animations and the drone are generated in code.</p>
+    <h3>Map data used to build places</h3>
+    <table class="credits">
+      <tr><td>Buildings, roads, water, woods</td><td>IGN BD TOPO (France)</td><td>Licence Ouverte Etalab 2.0</td></tr>
+      <tr><td>Terrain</td><td>IGN RGE ALTI 1 m (France)</td><td>Licence Ouverte Etalab 2.0</td></tr>
+      <tr><td>Aerial imagery</td><td>IGN BD ORTHO 20 cm (France)</td><td>Licence Ouverte Etalab 2.0</td></tr>
+      <tr><td>Buildings, roads, water, parks</td><td>© OpenStreetMap contributors, via OpenFreeMap vector tiles (CARTO vector tiles where the browser blocks OpenFreeMap) or Overpass</td><td>ODbL</td></tr>
+      <tr><td>Aerial imagery</td><td>USGS NAIP (US), PDOK (NL), swisstopo (CH), basemap.at (AT), PNOA (ES), GSI (JP)</td><td>public domain / CC BY 4.0 / free with credit</td></tr>
+      <tr><td>Terrain</td><td>USGS 3DEP (US), GSI DEM (Japan)</td><td>public domain / free with credit</td></tr>
+      <tr><td>Terrain</td><td>AWS Terrain Tiles (Mapzen / Tilezen)</td><td>see the AWS registry</td></tr>
+      <tr><td>Geoid (3D Tiles heights)</td><td>EGM96, NGA / NASA (via GeographicLib)</td><td>public domain</td></tr>
+      <tr><td>Aerial imagery</td><td>Esri World Imagery (Esri, Maxar, Earthstar Geographics, GIS User Community)</td><td>Esri terms of use</td></tr>
+      <tr><td>Aerial imagery</td><td>Sentinel-2 cloudless by EOX (last resort)</td><td>CC BY-NC-SA 4.0 (non-commercial)</td></tr>
+      <tr><td>Base map, search</td><td>OpenFreeMap (CARTO where the browser blocks it), Nominatim</td><td>ODbL</td></tr>
+    </table>
+    <p class="muted">The credits for the data actually used are written into each downloaded GLB.</p>
+    <h3>Software and fonts</h3>
+    <p>three.js (MIT), MapLibre GL JS (BSD-3-Clause), Rapier physics (Apache-2.0), three-vrm (MIT), Next.js (MIT). Fonts: Inter and Michroma, <a href="assets/fonts/OFL.txt" target="_blank" rel="noopener">SIL Open Font License 1.1</a>.</p>
+  </dialog>
+
+  <!-- CONTACT -->
+  <dialog id="dlg-contact" class="dlg">
+    <button class="dlg-close" aria-label="Close">✕</button>
+    <h2>Contact</h2>
+    <p class="lead">OpenGeoWorld is made by <b>Urban Geo Analytics</b>. Need a custom version for your city or organisation, your own data in it, a training or a research collaboration? Get in touch.</p>
+    <ul class="services">
+      <li>Geospatial analysis &amp; urban intelligence</li>
+      <li>Vision-language model services</li>
+      <li>Generative image, video &amp; scene editing</li>
+      <li>IoT, blockchain &amp; decentralised AI</li>
+      <li>Training &amp; workshops, research &amp; consulting</li>
+    </ul>
+    <p class="actions">
+      <a class="button primary" href="https://urbangeoanalytics.com/contact/" target="_blank" rel="noopener">Contact Urban Geo Analytics ↗</a>
+      <a class="button secondary" href="https://urbangeoanalytics.com" target="_blank" rel="noopener">urbangeoanalytics.com</a>
+    </p>
+  </dialog>
+
+  <script type="module" src="src/app.js"></script>
+</body>
+</html>
