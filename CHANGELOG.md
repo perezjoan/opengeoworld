@@ -2,6 +2,11 @@
 
 OpenGeoWorld follows [semantic versioning](https://semver.org). Each version is a git tag (`vX.Y.Z`).
 
+## v1.0.1 (2026-11-25)
+
+**Fix**
+- Étretat and the Pays de Caux coast (Cap d'Antifer) were outside the simplified France outline, so they got OpenStreetMap buildings, Esri photos and worldwide terrain instead of IGN's measured buildings, 20 cm photos and 1 m terrain. One offshore point added to the outline (`apps/web/src/geo.js`); Normandy, the Channel coast and the borders checked.
+
 ## v1.0.0 (2026-11-25)
 
 First public release: any place on Earth as an interactive 3D city, built in the browser from open data, with no API key, no server and nothing to install.

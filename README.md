@@ -8,7 +8,7 @@ no API key, no server, nothing to install.</p>
 
 <p align="center">
 <a href="https://urbangeoanalytics.com/opengeoworld/"><b>Live demo</b></a> ·
-<a href="CHANGELOG.md">v1.0.0</a> ·
+<a href="CHANGELOG.md">v1.0.1</a> ·
 <a href="LICENSE">MIT License</a> ·
 by <a href="https://urbangeoanalytics.com">Urban Geo Analytics</a> ·
 based on <a href="https://github.com/oncyberio/awe">awe</a> by <a href="https://oncyber.io">oncyber</a>

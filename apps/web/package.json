@@ -1,6 +1,6 @@
 {
   "name": "@opengeoworld/web",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "private": true,
   "description": "The 3-step app: place a point, build the place in 3D from open data, walk in it.",
   "type": "module",

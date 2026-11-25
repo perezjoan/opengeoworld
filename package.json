@@ -1,6 +1,6 @@
 {
   "name": "opengeoworld",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "private": true,
   "description": "Pick a place on a map, build it in 3D from open data (no API keys), walk and fly around it in the browser.",
   "packageManager": "pnpm@10.10.0",
