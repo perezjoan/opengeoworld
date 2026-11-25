@@ -145,6 +145,22 @@ Regenerate after editing a script, e.g. `node apps/world/scripts/gen-anims.mjs`.
 
 ## Open data sources
 
+### What "Auto" picks, layer by layer
+
+Each layer is chosen separately for the place you pick: the sharpest open source that covers it first, then the next one when a service doesn't answer or answers blank.
+
+| Layer | Best available, by place | Everywhere else |
+|---|---|---|
+| Buildings | France: IGN BD TOPO (measured heights and roof rises, materials, use) | OpenStreetMap vector tiles (heights where mapped, else from floor counts or estimated); Overpass as an option for roof shapes and materials |
+| Terrain | France: IGN RGE ALTI 1 m · United States: USGS 3DEP (1 m lidar in most of the country) · Japan: GSI 5 m | AWS Terrain Tiles: national models in some countries (England, Canada, New Zealand…), 10-30 m elsewhere |
+| Aerial imagery | Switzerland: swisstopo 10 cm · France: IGN 20 cm · Netherlands: PDOK 25 cm · Spain: PNOA 25 cm · Austria: basemap.at 30 cm · Japan: GSI · United States: Esri, then NAIP 60 cm | Esri World Imagery (about 30-60 cm in most cities); Sentinel-2 (10 m) as the last resort |
+| Roads | France: IGN BD TOPO (measured widths, lanes) | OpenStreetMap vector tiles (width from class and lanes) |
+| Water, woods, parks | France: IGN BD TOPO + OpenStreetMap | OpenStreetMap vector tiles |
+| Railways, street trees | OpenStreetMap everywhere (vector tiles; street trees via Overpass) | |
+| Base map | OpenFreeMap (CARTO tiles where the browser blocks it) | |
+
+### All sources
+
 | Data | Source | Coverage | Licence |
 |---|---|---|---|
 | Buildings | [IGN BD TOPO](https://geoservices.ign.fr/bdtopo) (WFS, measured heights) | France | Licence Ouverte Etalab 2.0 |
@@ -164,7 +180,7 @@ Regenerate after editing a script, e.g. `node apps/world/scripts/gen-anims.mjs`.
 | Street trees, tree rows | OpenStreetMap via Overpass | World | ODbL |
 | Base map, search | [OpenFreeMap](https://openfreemap.org) (CARTO where the browser blocks it), [Nominatim](https://nominatim.org) | World | ODbL |
 
-"Auto" uses IGN in France and OSM elsewhere, and falls back to the other if one fails. The attribution for the data used is written into every export. These public services have fair-use policies (Nominatim: max 1 request/s; Overpass: shared capacity): fine for a research site, worth revisiting if traffic grows.
+The attribution for the data used is written into every export. These public services have fair-use policies (Nominatim: max 1 request/s; Overpass: shared capacity): fine for a research site, worth revisiting if traffic grows.
 
 ## Repository layout
 
@@ -202,7 +218,7 @@ To release: update the version in `package.json` and `apps/web/src/version.js`, 
 ## Known limits
 
 - Facades are generic photo tiles chosen from the building's type, height and material, not the real facade. Roofs are simple shapes: complex footprints (L/U shapes, courtyards) get a flat roof, and IGN gives the roof height but not its shape.
-- Outside France the open data is thinner: vector tiles have no roof shapes or materials, the worldwide terrain is 10-30 m in many countries (river banks become slopes, cities can be lumpy), and street trees depend on Overpass answering.
+- The result is only as good as each country's open data (see *What "Auto" picks*). National buildings with measured heights are used in France only so far: elsewhere buildings come from OpenStreetMap, whose vector tiles have no roof shapes or materials. Where no national terrain is used, the worldwide tiles are 10-30 m in many countries, so river banks become slopes and cities can be lumpy. Street trees depend on Overpass answering. Next candidates: the Netherlands' 3D BAG and AHN, swissALTI3D, Japan's PLATEAU.
 - The ground is a regular height grid (~3 m cells with IGN terrain, ~4 m otherwise). Quay walls are cut where the ground has two flat levels; the ground beside ramps keeps a smoothed slope.
 - Water levels are estimated from the terrain and kept under the bridges.
 - The vector tiles carry no building type: a building containing a place of worship, castle or monument point is treated as heritage; there are no church-specific facades yet.
